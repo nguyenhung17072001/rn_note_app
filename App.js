@@ -1,5 +1,5 @@
-
 import React from 'react';
+import MainNavigation from './src/Navigation/MainNavigation';
 
 import {
   SafeAreaView,
@@ -20,9 +20,7 @@ const App= () => {
 
   return (
     <Provider store={store}>
-      <View>
-        <Text>Toi ten Hung</Text>
-      </View>
+      <MainNavigation />
     </Provider>
   );
 };
