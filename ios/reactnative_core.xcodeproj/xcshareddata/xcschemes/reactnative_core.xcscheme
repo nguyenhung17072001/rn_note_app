@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "reactnative_core.app"
-               BlueprintName = "reactnative_core"
-               ReferencedContainer = "container:reactnative_core.xcodeproj">
+               BuildableName = "rn_note_app.app"
+               BlueprintName = "rn_note_app"
+               ReferencedContainer = "container:rn_note_app.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "reactnative_coreTests.xctest"
-               BlueprintName = "reactnative_coreTests"
-               ReferencedContainer = "container:reactnative_core.xcodeproj">
+               BuildableName = "rn_note_appTests.xctest"
+               BlueprintName = "rn_note_appTests"
+               ReferencedContainer = "container:rn_note_app.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "reactnative_core.app"
-            BlueprintName = "reactnative_core"
-            ReferencedContainer = "container:reactnative_core.xcodeproj">
+            BuildableName = "rn_note_app.app"
+            BlueprintName = "rn_note_app"
+            ReferencedContainer = "container:rn_note_app.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "reactnative_core.app"
-            BlueprintName = "reactnative_core"
-            ReferencedContainer = "container:reactnative_core.xcodeproj">
+            BuildableName = "rn_note_app.app"
+            BlueprintName = "rn_note_app"
+            ReferencedContainer = "container:rn_note_app.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -1,4 +1,4 @@
-package com.reactnative_core;
+package com.rn_note_app;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
@@ -12,7 +12,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "reactnative_core";
+    return "rn_note_app";
   }
 
   /**

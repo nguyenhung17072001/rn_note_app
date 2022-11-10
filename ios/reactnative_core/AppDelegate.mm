@@ -41,7 +41,7 @@
   bridge.surfacePresenter = _bridgeAdapter.surfacePresenter;
 #endif
 
-  UIView *rootView = RCTAppSetupDefaultRootView(bridge, @"reactnative_core", nil);
+  UIView *rootView = RCTAppSetupDefaultRootView(bridge, @"rn_note_app", nil);
 
   if (@available(iOS 13.0, *)) {
     rootView.backgroundColor = [UIColor systemBackgroundColor];
