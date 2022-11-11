@@ -12,6 +12,7 @@ import Splash from "../Screens/Splash/Splash";
 //Auth
 import Carousel from "../Screens/CarouselScreen/Carousel";
 import SignIn from "../Screens/AuthScreen/SignIn";
+import SignUp from "../Screens/AuthScreen/SignUp";
 
 //Screen 
 import Home from "../Screens/Main/Home/Home";
@@ -27,7 +28,7 @@ const MainNavigation = ()=> {
                 headerShown: false
             }}>
                 {/* <StackAuth.Screen name="Carousel" component={Carousel} /> */}
-                
+                <StackAuth.Screen name="SignUp" component={SignUp} />
                 <StackAuth.Screen name="SignIn" component={SignIn} />
             </StackAuth.Navigator>
         )

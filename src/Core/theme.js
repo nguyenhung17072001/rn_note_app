@@ -7,8 +7,8 @@ const colors = {
   // themeColor:'#FF7466',
   //blue
   // themeColor:'#00a651',
-  mainBackgroundColor: '#132A9F'
-  
+  mainBackgroundColor: '#132A9F',
+  blackText: "#040404"
   
 }
 const icons = {
