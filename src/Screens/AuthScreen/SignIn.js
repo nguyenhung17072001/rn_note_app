@@ -6,7 +6,11 @@ import styles from './AuthStyle'
 const {height} = Dimensions.get('window')
 import { useNavigation } from '@react-navigation/native';
 const SignIn =()=> {
-    const nav = useNavigation()
+    const nav = useNavigation();
+
+    const login =()=> {
+        nav.navigate("HomeNavigation")
+    }
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle={"dark-content"} backgroundColor={"white"} />
@@ -23,7 +27,7 @@ const SignIn =()=> {
                 </View>
             </View>
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity onPress={login} style={styles.button}>
                 <Text style={styles.textButton}>Đăng nhập</Text>
             </TouchableOpacity>
             <View style={{flexDirection: 'row', marginTop: 18}}>
