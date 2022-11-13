@@ -47,7 +47,7 @@ http.interceptors.response.use(function(response) {
       message: "Chưa đăng nhập"
     }
   }
-  throw 'Lỗi từ server';
+  throw `Lỗi từ server: ${error}`;
   // Any status codes that falls outside the range of 2xx cause this function to trigger
   // Do something with response error
   // return Promise.reject(error);

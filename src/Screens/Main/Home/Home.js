@@ -10,15 +10,23 @@ import axios from 'axios'
 import { searchsEventStart } from "../../../flow/reducers/admin/event";
 const Home=(props)=> {
     
+    /* useEffect(()=> {
+        axios.get('http://localhost:3000/api/event/list/person',{
+            userId: "636a9d0ca6cf9ff86605fe6a"
+        })
+        .then((res)=> {
+            console.log('res: ', res)
+        }).catch((err)=> {
+            console.log('err: ', err.response)
+        })
+    }, []) */
     useEffect(()=> {
         props.searchsEvent({
-            
             userId: "636a9d0ca6cf9ff86605fe6a"
-            
         })
     }, [])
 
-    console.log('events: ', props.events)
+    //console.log('events: ', props.events)
     
     //event
     const vacation = {key: 'vacation', color: 'red', selectedDotColor: 'blue'};
@@ -53,7 +61,7 @@ const Home=(props)=> {
 
 const mapStateToProps = state => {
     return {
-        events: state.authEvent
+        events: state.adminEvent
       
     };
   };
