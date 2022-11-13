@@ -3,9 +3,22 @@ import { View, Text, Image, StyleSheet, SafeAreaView, Dimensions, StatusBar, Tou
 import theme from "../../../Core/theme";
 const {icons, images, colors} = theme;
 const {height, width} = Dimensions.get('window')
+import {connect} from 'react-redux';
 import styles from "./HomeStyle";
 import { Calendar } from "react-native-calendars";
-const Home=()=> {
+import axios from 'axios'
+import { searchsEventStart } from "../../../flow/reducers/admin/event";
+const Home=(props)=> {
+    
+    useEffect(()=> {
+        props.searchsEvent({
+            
+            userId: "636a9d0ca6cf9ff86605fe6a"
+            
+        })
+    }, [])
+
+    console.log('events: ', props.events)
     
     //event
     const vacation = {key: 'vacation', color: 'red', selectedDotColor: 'blue'};
@@ -38,5 +51,18 @@ const Home=()=> {
     );
 };
 
-
-export default Home;
+const mapStateToProps = state => {
+    return {
+        events: state.authEvent
+      
+    };
+  };
+const mapStateToDispatch = dispatch => {
+    return {
+        searchsEvent: data=> {
+            dispatch(searchsEventStart(data))
+      },
+  
+    };
+  };
+export default connect(mapStateToProps, mapStateToDispatch)(Home);

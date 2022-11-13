@@ -1,41 +1,36 @@
 import { take, put, call, takeEvery } from 'redux-saga/effects';
 import {
-    exampleService,
+    searchEventsService
     
-} from '../service/example'
-import { updateDeviceToken } from '../services/notificationRt.js';
+} from '../service/event'
+//import { updateDeviceToken } from '../services/notificationRt.js';
 // import { setCookie, removeCookie } from '../../util/cookie';
 import { HttpResponseObject, ErrorHttpResponseObject, ServerErrorHttpResponseObject } from "../../util/http";
 
 import {
-    actionStart,
-    actionSuccess,
-    actionFail,
-    //
+    searchsEventStart,
+    searchsEventSuccess,
+    searchsEventFail
     
 
-} from '../../reducers/admin/example';
+} from '../../reducers/admin/event';
 
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export function* exampleAction(action) {
+export function* searchsEventAction(action) {
     // try {
         console.log("+++++++++++++++++++++++++++++++++++++++++action");
-        console.log(action);
+        //console.log(action);
 
-        const res = yield call(exampleService, action.payload);
+        const res = yield call(searchEventsService, action.payload);
         console.log('res--------', res)
         const resObject = new HttpResponseObject(res);
         console.log('22222222222: ', resObject)
         if (resObject.isSuccess()) {
 
             
-            /* yield call(AsyncStorage.setItem, 'token', res.data.data.token);
-            yield call(AsyncStorage.setItem, 'user', JSON.stringify(res.data.data));
-            yield call(AsyncStorage.setItem, 'loginned', JSON.stringify(true)); */
-            
-            yield put(actionSuccess(resObject.getData()));
+            yield put(searchsEventSuccess(resObject.getData()));
             
 
         }
@@ -45,17 +40,20 @@ export function* exampleAction(action) {
             console.log(("res"));
             console.log((res));
             console.log(new ErrorHttpResponseObject(res));
-            console.log('err: ', errorObject);
-            yield put(actionFail(errorObject));
+            console.log('er===: ', errorObject);
+            yield put(searchsEventFail(errorObject));
             
         }
 
 }
 
 
-export function* watchAdminExample() {
+
+
+export function* watchAdminEvent() {
     
     
-    yield takeEvery(actionStart, exampleAction);
+    yield takeEvery(searchsEventStart, searchsEventAction);
+   
     
 }

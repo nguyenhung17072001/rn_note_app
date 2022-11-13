@@ -1,11 +1,12 @@
 import { all } from "redux-saga/effects";
-import { watchAdminExample } from "./admin/example";
+import { watchAdminAuth } from "./admin/auth";
+import { watchAdminEvent } from './admin/event'
 
 export default function* rootSaga() {
     try {
         yield all([
-            watchAdminExample(),
-
+            watchAdminAuth(),
+            watchAdminEvent(),
         ]);
     } catch (err) {
         console.log('err: ', err);
