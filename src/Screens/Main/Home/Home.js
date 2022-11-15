@@ -10,16 +10,17 @@ import axios from 'axios'
 import { searchsEventStart } from "../../../flow/reducers/admin/event";
 const Home=(props)=> {
     
-    /* useEffect(()=> {
+    useEffect(()=> {
         axios.get('http://localhost:3000/api/event/list/person',{
             userId: "636a9d0ca6cf9ff86605fe6a"
         })
         .then((res)=> {
             console.log('res: ', res)
         }).catch((err)=> {
-            console.log('err: ', err.response)
+            console.log('err: ', err)
         })
-    }, []) */
+    }, []) 
+
     useEffect(()=> {
         props.searchsEvent({
             userId: "636a9d0ca6cf9ff86605fe6a"
