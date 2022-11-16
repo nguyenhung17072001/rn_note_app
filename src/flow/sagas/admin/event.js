@@ -24,9 +24,9 @@ export function* searchsEventAction(action) {
         //console.log(action);
 
         const res = yield call(searchEventsService, action.payload);
-        console.log('res--------', res)
+        //console.log('res--------', res)
         const resObject = new HttpResponseObject(res);
-        console.log('22222222222: ', resObject)
+        //console.log('22222222222: ', resObject)
         if (resObject.isSuccess()) {
 
             

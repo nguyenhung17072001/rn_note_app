@@ -18,22 +18,21 @@ import {
     
 
 } from '../../reducers/admin/auth';
-
+import axios from 'axios';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export function* loginAction(action) {
+export function* login(action) {
     // try {
-        console.log("+++++++++++++++++++++++++++++++++++++++++action");
-        console.log(action);
+        console.log('action: ', action.payload);
 
         const res = yield call(loginService, action.payload);
-        console.log('res--------', res)
+        //console.log('res--------', res)
         const resObject = new HttpResponseObject(res);
-        console.log('22222222222: ', resObject)
+        //console.log('22222222222: ', resObject)
         if (resObject.isSuccess()) {
 
-            
+            console.log('Đăng nhập thành công')
             yield call(AsyncStorage.setItem, 'token', res.data.data.token);
             yield call(AsyncStorage.setItem, 'user', JSON.stringify(res.data.data));
             yield call(AsyncStorage.setItem, 'loginned', JSON.stringify(true));
@@ -50,9 +49,9 @@ export function* loginAction(action) {
             console.log(new ErrorHttpResponseObject(res));
             console.log('err: ', errorObject);
             yield put(loginFail(errorObject));
-            
+            yield put(errorNotification(errorObject))
         }
-
+//    
 }
 
 export function* registerAction(action) {
@@ -61,9 +60,9 @@ export function* registerAction(action) {
         console.log(action);
 
         const res = yield call(registerService, action.payload);
-        console.log('res--------', res)
+        //console.log('res--------', res)
         const resObject = new HttpResponseObject(res);
-        console.log('22222222222: ', resObject)
+        //console.log('22222222222: ', resObject)
         if (resObject.isSuccess()) {
 
             
@@ -90,7 +89,7 @@ export function* registerAction(action) {
 export function* watchAdminAuth() {
     
     
-    yield takeEvery(loginStart, loginAction);
+    yield takeEvery(loginStart, login);
     yield takeEvery(registerStart, registerAction);
     
 }

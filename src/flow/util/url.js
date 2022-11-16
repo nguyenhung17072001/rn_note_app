@@ -2,7 +2,7 @@ const API_ROOT_URL = "http://localhost:3000";
 
 export const URL = {
     auth: {
-        login: API_ROOT_URL + 'api/user/login',
+        login: API_ROOT_URL + '/api/user/login',
         register: API_ROOT_URL + 'api/user/register'
     },
     event: {

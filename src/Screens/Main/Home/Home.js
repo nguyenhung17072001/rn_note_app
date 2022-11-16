@@ -8,26 +8,34 @@ import styles from "./HomeStyle";
 import { Calendar } from "react-native-calendars";
 import axios from 'axios'
 import { searchsEventStart } from "../../../flow/reducers/admin/event";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const Home=(props)=> {
-    
-    useEffect(()=> {
-        axios.get('http://localhost:3000/api/event/list/person',{
-            userId: "636a9d0ca6cf9ff86605fe6a"
-        })
-        .then((res)=> {
-            console.log('res: ', res)
-        }).catch((err)=> {
-            console.log('err: ', err)
-        })
-    }, []) 
+
+    const [user, setUser] = useState(null)
+
+
+    const getUser = async () => {
+        try {
+            const value = await AsyncStorage.getItem('user')
+            if(value !== null) {
+
+                setUser(JSON.parse(value)?.user)
+            }
+        } catch(e) {
+            console.log('err setUser at Home: ', e)
+        }
+      }
 
     useEffect(()=> {
+        getUser();
+
+
         props.searchsEvent({
-            userId: "636a9d0ca6cf9ff86605fe6a"
+            userId: user?._id
         })
     }, [])
 
-    //console.log('events: ', props.events)
+    console.log('events ', props.events)
     
     //event
     const vacation = {key: 'vacation', color: 'red', selectedDotColor: 'blue'};
@@ -39,8 +47,8 @@ const Home=(props)=> {
             <StatusBar backgroundColor={colors.mainBackgroundColor} barStyle={"light-content"} />
             <View style={styles.header}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <Image  style={styles.avatar} source={images.basicAvatar} resizeMode={"contain"}/>
-                    <Text style={{color: 'white', fontSize: 16}}>Nguyễn Hưng</Text>
+                    <Image  style={styles.avatar} source={user&&user.avatar?{uri: user.avatar}:images.basicAvatar} resizeMode={"contain"}/>
+                    <Text style={{color: 'white', fontSize: 16}}>{user?.name}</Text>
                 </View>
                 <TouchableOpacity>
                     <Image style={styles.addIcon} source={icons.add} />
@@ -62,7 +70,7 @@ const Home=(props)=> {
 
 const mapStateToProps = state => {
     return {
-        events: state.adminEvent
+        events: state.adminEvent.data
       
     };
   };
