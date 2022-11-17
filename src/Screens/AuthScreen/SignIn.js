@@ -18,7 +18,7 @@ const SignIn =(props)=> {
         if(username=='') {
             alert('Chưa điền tài khoản')
         }
-        else if(password='') {
+        else if(password=='') {
             alert("Chưa điền mật khẩu")
         } else {
             props.loginAuth({
@@ -34,7 +34,7 @@ const SignIn =(props)=> {
         if(props.typeAuth=="loginSuccess") {
             nav.replace("HomeNavigation")
             //nav.navigate("HomeNavigation")
-        } else {
+        } else if(props.typeAuth=="loginFail") {
             alert("Tên tài khoản hoặc mật khẩu sai")
         }
     }, [props.typeAuth])
