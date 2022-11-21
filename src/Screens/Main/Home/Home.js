@@ -51,7 +51,7 @@ const dayOfWeek = [
 ]
 const Home=(props)=> {
 
-    const [thisToday, setThisToday] = useState(new Date());
+    const [weekState, setWeekState] = useState(0);
     const [user, setUser] = useState(null)
     const [todaySelect, setTodaySelect] = useState(new Date().getDay());
     const [selected, setSelected] = useState(new Date())
@@ -68,7 +68,21 @@ const Home=(props)=> {
             console.log('err setUser at Home: ', e)
         }
     }
-
+    const nextWeek = ()=> {
+        setWeekState(weekState+1);
+        //let change=selected;
+        //change.setDate(change + 7);
+        //setSelected(change)
+        //props.searchsEvent()
+    }
+    const prevWeek = ()=> {
+        setWeekState(weekState-1);
+        //let change=selected;
+        //change.setDate(change + 7);
+        //setSelected(change)
+        //props.searchsEvent()
+        
+    }
 
     useEffect(()=> {
         getUser();
@@ -107,7 +121,7 @@ const Home=(props)=> {
             
         })
         setData(eventSelected)
-    }, [selected])
+    }, [selected, weekState])
     
     //console.log('events ', DATA)
     
@@ -142,7 +156,7 @@ const Home=(props)=> {
                 change.setDate(now.getDate() + distance);
                 setSelected(change)
             } else {
-                let distance = index + 1 - todaySelect;
+                let distance = index + 1 - todaySelect + weekState*7;
                 //console.log('distance: ', distance)
 
                 const now = new Date();
@@ -156,9 +170,14 @@ const Home=(props)=> {
         let thisDate = null;
         //console.log('todaySelect: ', todaySelect)
         if(todaySelect == item.day) {
-            thisDate = new Date().getDate();
+             
+            //thisDate = new Date().getDate();
+            let now = new Date();
+            let change = new Date();
+            let date = change.setDate(now.getDate()+weekState*7)
+            thisDate = moment(date).format('DD')
         } else {
-            let distance = index + 1 - todaySelect;
+            let distance = index + 1 - todaySelect + weekState*7;
             let now = new Date();
             let change = new Date();
             let date = change.setDate(now.getDate() + distance);
@@ -220,7 +239,7 @@ const Home=(props)=> {
             <View style={{backgroundColor: colors.mainBackgroundColor, paddingBottom: height*0.08}}>
                 <Text style={styles.timeToday} >{todayString}</Text>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={prevWeek}>
                         <Image resizeMode="contain" style={styles.arrowIcon} source={icons.leftArrow} />
                     </TouchableOpacity>
                     
@@ -233,7 +252,7 @@ const Home=(props)=> {
                         })
                     }
                     </View>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={nextWeek}>
                         <Image resizeMode="contain" style={styles.arrowIcon} source={icons.rightArrow} />
                     </TouchableOpacity>
                 </View>
