@@ -17,7 +17,9 @@ const icons = {
   add: require("../assets/icons/add.png"),
   leftArrow: require('../assets/icons/left-arrow.png'),
   rightArrow: require('../assets/icons/right-arrow.png'),
-  checked: require('../assets/icons/checked.png')
+  checked: require('../assets/icons/checked.png'),
+  feedback: require('../assets/icons/feedback.png'),
+  logout: require('../assets/icons/logout.png'),
 }
 const images = {
   logoSplash: require('../assets/images/logoSplash.png'),

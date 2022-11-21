@@ -51,11 +51,28 @@ const registerAction =
     
     [registerFail]: (state, { payload: { error } }) => ({ ...state, error, isLoading: false, data: [], type: "registerFail" }),
 };
+
+export const { adminLogoutStart, adminLogoutSuccess, adminLogoutFail } = createActions({
+    ADMIN_LOGOUT_START: data => { return (data) },
+    ADMIN_LOGOUT_SUCCESS: data => ({ data }),
+    ADMIN_LOGOUT_FAIL: error => ({ error })
+});
+
+const adminLogoutAction =
+{
+    [adminLogoutStart]: state => { return { ...state, error: null, isLoading: true, type: "adminLogoutStart" } },
+    [adminLogoutSuccess]: (state, { payload: { data } }) => {
+        return ({
+            ...state, user: null, role: null, token: null, type: "adminLogoutSuccess", isLoading: false
+        })
+    },
+    [adminLogoutFail]: (state, { payload: { error } }) => ({ ...state, error, isLoading: false, data: [], type: "adminLogoutFail" })
+};
 export const reducer = handleActions(
     {
         ...loginAction,
         ...registerAction,
-
+        ...adminLogoutAction,
     },
 
     defaultState

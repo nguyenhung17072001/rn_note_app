@@ -85,8 +85,8 @@ const Home=(props)=> {
     const todayString = 'Tháng '+(today.getMonth()+1) + ', ' + today.getFullYear()
     //console.log('todayString ', todayString)
     // Data event:
-    const DATA = props.events;
-    const dataToday = props.events.filter((event)=> {
+    //const DATA = props.events;
+    const dataToday = props?.events?.filter((event)=> {
         let ddmmyyyyEvent = moment(event.time).format('DD/MM/YYYY');
         let ddmmyyyyToday = moment(new Date()).format('DD/MM/YYYY');
         return ddmmyyyyToday== ddmmyyyyEvent;
@@ -95,7 +95,7 @@ const Home=(props)=> {
     useEffect(()=> {
 
 
-        const eventSelected = props?.events.filter((event)=> {
+        const eventSelected = props?.events?.filter((event)=> {
             let ddmmyyyyEvent = moment(event.time).format('DD/MM/YYYY');
             let ddmmyyyySelected = moment(selected).format('DD/MM/YYYY');
             //console.log('ddmmyyyyEvent: ', ddmmyyyyEvent)
@@ -167,9 +167,10 @@ const Home=(props)=> {
             //console.log('thisDate: ', thisDate)
         }
         return(
-            <TouchableOpacity key={index} onPress={handle} style={[styles.dayItem, 
+            <View>
+                <TouchableOpacity key={index} onPress={handle} style={[styles.dayItem, 
                 //other styles are written on todaySelect         
-
+                
                 todaySelect==item.day && {backgroundColor: 'white'},
                 
             ]}>
@@ -180,10 +181,12 @@ const Home=(props)=> {
                     todaySelect==item.day && {color: colors.mainBackgroundColor}
                 ]}>{thisDate}</Text>
             </TouchableOpacity>
+            {item.day==selected.getDay()?<View style={[{height: 5, width: 5, borderRadius: 100, backgroundColor: 'white', alignSelf: 'center', marginVertical: 2}]} />:null}
+            </View>
         )
     }
-    
-    //event
+     
+    //event 
     const renderItem=({item, index})=> {
         let time = moment(item.time).format('LT');
         
@@ -237,8 +240,8 @@ const Home=(props)=> {
             </View>
 
             <FlatList
-                style={{ marginTop: -height*0.05, backgroundColor: 'white', borderTopRightRadius: 20, borderTopLeftRadius: 20}}
-                data={data}
+                style={{ marginTop: -height*0.07, backgroundColor: 'white', borderTopRightRadius: 20, borderTopLeftRadius: 20}}
+                data={data?data:[]}
                 renderItem={renderItem}
                 keyExtractor={item => item._id}
             />

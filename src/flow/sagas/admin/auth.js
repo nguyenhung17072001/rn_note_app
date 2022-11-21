@@ -14,7 +14,11 @@ import {
     //
     registerStart,
     registerSuccess,
-    registerFail
+    registerFail,
+    //
+    adminLogoutStart,
+    adminLogoutSuccess,
+    adminLogoutFail
     
 
 } from '../../reducers/admin/auth';
@@ -85,11 +89,30 @@ export function* registerAction(action) {
 
 }
 
+export function* adminLogout(action) {
+    try {
+        // removeCookie('token');
+        // removeCookie('user');
+        // removeCookie('role');
+        // location.href=('/admin/dang-nhap');
+        yield call(AsyncStorage.removeItem, 'token');
+
+        yield call(AsyncStorage.removeItem, 'user');
+        yield call(AsyncStorage.removeItem, 'loginned');
+        yield put(adminLogoutSuccess());
+        
+    } catch (error) {
+        let errorObject = (new ServerErrorHttpResponseObject(error)).getErrorObject();
+        yield put(adminLogoutFail(errorObject));
+    }
+}
+
 
 export function* watchAdminAuth() {
     
     
     yield takeEvery(loginStart, login);
     yield takeEvery(registerStart, registerAction);
+    yield takeEvery(adminLogoutStart, adminLogout);
     
 }
