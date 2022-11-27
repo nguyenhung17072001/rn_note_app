@@ -1,6 +1,6 @@
 import React from 'react';
 import MainNavigation from './src/Navigation/MainNavigation';
-
+import messaging from '@react-native-firebase/messaging';
 import {
   SafeAreaView,
   ScrollView,
