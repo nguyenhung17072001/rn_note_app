@@ -1,6 +1,7 @@
 
 import {call, cancel, fork, put, select, take, takeEvery} from 'redux-saga/effects';
 import messaging from '@react-native-firebase/messaging'
+import notifee from '@notifee/react-native'; 
 
 import {
     loginNotificationStart,
