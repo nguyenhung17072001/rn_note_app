@@ -52,6 +52,9 @@ const dayOfWeek = [
 ]
 const Home=(props)=> {
 
+   
+    
+
 
     //messaging
     useEffect(()=> {
@@ -101,7 +104,7 @@ const Home=(props)=> {
           //   nav.navigate(initialNotification.data.screen, {id: initialNotification.data.related_id});
           // }
           setNotification(initialNotification)
-          setModalNotifee(true)
+          //setModalNotifee(true)
           console.log('Notification caused application to open', initialNotification.notification);
           console.log('Press action used to open the app', initialNotification.pressAction);
         }
