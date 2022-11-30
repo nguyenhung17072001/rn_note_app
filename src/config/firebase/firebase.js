@@ -10,7 +10,7 @@ import messaging from '@react-native-firebase/messaging';
 const  firebaseConfig = {
     apiKey: 'AIzaSyBtUZYqfc0pX8qDgZqx-MVlsFqNz9uAbEA',
     authDomain: 'note-app-fa0cd.firebaseapp.com',
-    databaseURL: 'https://note-app-fa0cd-default-rtdb.asia-southeast1.firebasedatabase.app',
+    //databaseURL: 'https://note-app-fa0cd-default-rtdb.asia-southeast1.firebasedatabase.app',
     projectId: 'note-app-fa0cd',
     storageBucket: 'note-app-fa0cd.appspot.com',
     messagingSenderId: 'sender-id',

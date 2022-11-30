@@ -10,7 +10,8 @@ import axios from 'axios'
 import { searchsEventStart } from "../../../flow/reducers/admin/event";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import moment from 'moment'
-
+import messaging from '@react-native-firebase/messaging'
+import { loginNotificationStart } from "../../../flow/reducers/admin/notification";
 const colorsItem = ['#D7ECFC','#FCD7E2', '#FBD7FC', '#D9D7FC', '#D7ECFC']
 const dayOfWeek = [
     {
@@ -50,6 +51,71 @@ const dayOfWeek = [
     }
 ]
 const Home=(props)=> {
+
+
+    //messaging
+    useEffect(()=> {
+        if (props.isLogin) {
+            props.loginNotification();
+            //props.fetchProfile()
+            //props.refreshToken();
+        }
+    }, [])
+    useEffect(() => {
+        const unsubscribe = messaging().onMessage(async remoteMessage => {
+            //alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+            console.log('remoteMessage: ', remoteMessage);
+
+            
+        });
+       
+        
+        messaging().onNotificationOpenedApp(remoteMessage => {
+          console.log('remoteMessage: ', remoteMessage)
+          
+        });
+        //console.log('token: ', messaging().getToken())
+        //console.log('remoteMessage: ', 111111111111111111111133333)
+        messaging()
+          .getInitialNotification()
+          .then(remoteMessage => {
+            if (remoteMessage) {
+              console.log('remoteMessage: ', remoteMessage)
+              
+            }
+            // setLoading(false);
+          });
+        
+          messaging().setBackgroundMessageHandler(async remoteMessage => {
+            console.log('Message handled in the background!', remoteMessage);
+          });
+        
+    
+        return unsubscribe;
+      }, [])
+      async function bootstrap() {
+        const initialNotification = await messaging().getInitialNotification();
+        if (initialNotification) {
+          console.log('Notification caused application to open', initialNotification.notification);
+          // if (initialNotification.data.screen && initialNotification.data.related_id){
+          //   nav.navigate(initialNotification.data.screen, {id: initialNotification.data.related_id});
+          // }
+          setNotification(initialNotification)
+          setModalNotifee(true)
+          console.log('Notification caused application to open', initialNotification.notification);
+          console.log('Press action used to open the app', initialNotification.pressAction);
+        }
+      }
+      useEffect(() => {
+        bootstrap()
+          .then(() => {})
+          .catch((err)=> {
+            console.log('err Home.js ', err)
+          });
+      }, []);
+
+
+
 
     const [weekState, setWeekState] = useState(0);
     const [user, setUser] = useState(null)
@@ -278,16 +344,22 @@ const Home=(props)=> {
 };
 
 const mapStateToProps = state => {
+    //console.log(state.adminAuth)
     return {
-        events: state.adminEvent.data
+        events: state.adminEvent.data,
+        isLogin: state.adminAuth.token ? true : false,
       
     };
+    
   };
 const mapStateToDispatch = dispatch => {
     return {
         searchsEvent: data=> {
             dispatch(searchsEventStart(data))
-      },
+        },
+        loginNotification: data => {
+            dispatch(loginNotificationStart(data));
+        },
   
     };
   };

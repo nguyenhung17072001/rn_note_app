@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import MainNavigation from './src/Navigation/MainNavigation';
-import messaging from '@react-native-firebase/messaging';
+import messaging from './src/config/firebase/firebase'
 import {
   SafeAreaView,
   ScrollView,
@@ -13,9 +13,11 @@ import {
 import { Provider } from 'react-redux';
 import makeStore from './src/flow/store';
 
+
 const App= () => {
   const {store} = makeStore()
-
+  
+  
   
 
   return (
