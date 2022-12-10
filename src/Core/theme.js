@@ -20,6 +20,7 @@ const icons = {
   checked: require('../assets/icons/checked.png'),
   feedback: require('../assets/icons/feedback.png'),
   logout: require('../assets/icons/logout.png'),
+  bell: require('../assets/images/bell.png')
 }
 const images = {
   logoSplash: require('../assets/images/logoSplash.png'),

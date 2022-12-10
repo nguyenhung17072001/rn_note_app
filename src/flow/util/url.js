@@ -8,6 +8,9 @@ export const URL = {
     event: {
         listEvent: API_ROOT_URL + '/api/event/list/person',
         //insertEvent
+    },
+    notification: {
+        updateDeviceToken: API_ROOT_URL+'/api/notification/update/token'
     }
 }
 

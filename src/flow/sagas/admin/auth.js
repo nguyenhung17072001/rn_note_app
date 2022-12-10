@@ -3,7 +3,7 @@ import {
     loginService,
     registerService
 } from '../service/auth'
-//import { updateDeviceToken } from '../services/notificationRt.js';
+import { updateDeviceToken } from '../service/notification';
 // import { setCookie, removeCookie } from '../../util/cookie';
 import { HttpResponseObject, ErrorHttpResponseObject, ServerErrorHttpResponseObject } from "../../util/http";
 

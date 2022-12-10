@@ -53,7 +53,9 @@ const styles= StyleSheet.create({
         marginVertical: height*0.005,
         //backgroundColor: 'red',
         borderRadius: 8,
-        elevation: 0.5,
+        //elevation: 4,
+        borderWidth: 0.2
+        
         
     }
 })

@@ -20,7 +20,7 @@ import SignUp from "../Screens/AuthScreen/SignUp";
 //Screen 
 import Home from "../Screens/Main/Home/Home";
 import Setting from "../Screens/Main/Setting/Setting";
-
+import Notification from "../Screens/Main/Notification/Notification";
 const Stack = createStackNavigator();
 
 const MainNavigation = ()=> {
@@ -63,6 +63,20 @@ const MainNavigation = ()=> {
                         )
                     }}
                 />
+                <Tab.Screen name="Notification" component={Notification}
+                    options={{
+                        tabBarStyle: {
+                            height: height*0.08
+                        },
+                        tabBarIcon: ({focused})=> (
+                            <Image resizeMode="contain" style={{height: height*0.04,width: width*0.09, tintColor: focused ? colors.mainBackgroundColor : '#D3CDCD'}} source={icons.bell} />
+                        ),
+                        tabBarLabel: ({focused})=>(
+                            <Text style={{fontSize: 10, color: focused?colors.mainBackgroundColor:'#D3CDCD'}} >Thông báo</Text>
+                        )
+                    
+                    }} />
+
                 <Tab.Screen name="Setting" component={Setting}
                     options={{
                         tabBarStyle: {
@@ -76,6 +90,7 @@ const MainNavigation = ()=> {
                         )
                     
                     }} />
+                
             </Tab.Navigator>
         );
     }

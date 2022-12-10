@@ -10,7 +10,7 @@ import {
 } from '../../reducers/admin/notification'
 import {getTokenService, } from '../service/notification'
 import {getUserId} from "../../util/get-from-store";
-
+import { updateDeviceToken } from '../service/notification';
 
 async function onMessageReceived(message) {
     // Do something 
@@ -62,7 +62,11 @@ function* loginNotification(action) {
                 
                 console.log('9999999999999999999999999999999999999999999token')
                 console.log(token)
-                //const data = yield call(updateDeviceToken, {token, app_user_id: userId}); 
+                const data = yield call(updateDeviceToken, {
+                    userId: userId,
+                    token: token
+                }); 
+                //console.log('data====', data)
                 //const unRead = yield call(countUnReadNotification, {payload: {id: userId}}); 
           
                 messaging().onMessage(onMessageReceived); 
