@@ -10,7 +10,8 @@ export const URL = {
         //insertEvent
     },
     notification: {
-        updateDeviceToken: API_ROOT_URL+'/api/notification/update/token'
+        updateDeviceToken: API_ROOT_URL+'/api/notification/update/token',
+        searchsNotification: API_ROOT_URL+'/api/notification/searchs'
     }
 }
 

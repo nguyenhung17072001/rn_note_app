@@ -6,12 +6,17 @@ import notifee from '@notifee/react-native';
 import {
     loginNotificationStart,
     loginNotificationFail,
-    loginNotificationSuccess
+    loginNotificationSuccess,
+
+    searchsNotificationStart,
+    searchsNotificationSuccess,
+    searchsNotificationFail,
+    
 } from '../../reducers/admin/notification'
 import {getTokenService, } from '../service/notification'
 import {getUserId} from "../../util/get-from-store";
-import { updateDeviceToken } from '../service/notification';
-
+import { updateDeviceToken, searchsNotificationService } from '../service/notification';
+import { HttpResponseObject, ErrorHttpResponseObject, ServerErrorHttpResponseObject } from "../../util/http";
 async function onMessageReceived(message) {
     // Do something 
     // debugger
@@ -80,13 +85,43 @@ function* loginNotification(action) {
             yield put(loginNotificationFail({}))
         }
     
-    }
+}
 
+export function* searchsNotificationAction(action) {
+    // try {
+        console.log("+++++++++++++++++++++++++++++++++++++++++action");
+        //console.log(action);
 
+        const res = yield call(searchsNotificationService, action.payload);
+        //console.log('res--------', res)
+        const resObject = new HttpResponseObject(res);
+        //console.log('22222222222: ', resObject)
+        if (resObject.isSuccess()) {
 
-    export function* notificationFlow() {
+            
+            yield put(searchsNotificationSuccess(resObject.getData()));
+            
+
+        }
         
-        yield takeEvery(loginNotificationStart, loginNotification);
+        else {
+            let errorObject = (new ErrorHttpResponseObject(res)).getErrorObject();
+            console.log(("res"));
+            console.log((res));
+            console.log(new ErrorHttpResponseObject(res));
+            console.log('er===: ', errorObject);
+            yield put(searchsNotificationFail(errorObject));
+            
+        }
+
+}
+
+
+
+export function* notificationFlow() {
         
-    }
+    yield takeEvery(loginNotificationStart, loginNotification);
+    yield takeEvery(searchsNotificationStart, searchsNotificationAction);
+        
+}
 

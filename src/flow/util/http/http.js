@@ -7,7 +7,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const http = axios.create({
   timeout: 2000,
-  headers: { 'Content-Type': 'application/json', "Access-Control-Allow-Origin": "*" },
+  headers: { 
+    'Content-Type': 'application/json', 
+    "Access-Control-Allow-Origin": "*" 
+  },
 });
 
 // Add token to every request

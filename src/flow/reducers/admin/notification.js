@@ -22,6 +22,25 @@ export const loginNotificationActions =
         [loginNotificationFail]: (state, { payload: { error } }) => { return({ ...state, error, isLoading: false, type: "loginNotificationFail" })},
 };
 
+export const { searchsNotificationStart, searchsNotificationSuccess, searchsNotificationFail } = createActions({
+    SEARCHS_NOTIFICATION_START: data => {  return (data)},
+    SEARCHS_NOTIFICATION_SUCCESS: data => { return { data }},
+    SEARCHS_NOTIFICATION_FAIL: error => { return { error }}
+});
+    
+export const searchsNotificationActions = 
+{
+        [searchsNotificationStart]: state => { return ({ ...state, error: null, isLoading: true, type: "searchsNotificationStart" })},
+        [searchsNotificationSuccess]: (state, { payload: { data } }) => {   return ({
+            ...state,
+            error: null,
+            isLoading: false,
+            listNotifications: data,
+            type: "searchsNotificationSuccess"
+        })},
+        [searchsNotificationFail]: (state, { payload: { error } }) => { return({ ...state, error, isLoading: false, type: "searchsNotificationFail" })},
+};
+
 
 
 
@@ -30,7 +49,7 @@ export const loginNotificationActions =
 export const reducer = handleActions(
     {
         ...loginNotificationActions,
-        
+        ...searchsNotificationActions
     },
     defaultState
 );
