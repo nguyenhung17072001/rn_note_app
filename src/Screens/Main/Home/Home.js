@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { View, Text, Image, StyleSheet, SafeAreaView, Dimensions, StatusBar, TouchableOpacity, FlatList } from "react-native";
+import { View, Text, Image, RefreshControl, SafeAreaView, Dimensions, StatusBar, TouchableOpacity, FlatList } from "react-native";
 import theme from "../../../Core/theme";
 const {icons, images, colors} = theme;
 const {height, width} = Dimensions.get('window')
@@ -12,7 +12,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import moment from 'moment'
 import messaging from '@react-native-firebase/messaging'
 import { loginNotificationStart } from "../../../flow/reducers/admin/notification";
-const colorsItem = ['#D7ECFC','#FCD7E2', '#FBD7FC', '#D9D7FC', '#D7ECFC']
+const colorsItem = ['#D7ECFC','#FCD7E2', '#FBD7FC', '#D9D7FC', '#D7ECFC'];
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  }
 const dayOfWeek = [
     {
         id: 'Thứ 2',
@@ -52,7 +55,9 @@ const dayOfWeek = [
 ]
 const Home=(props)=> {
 
-   
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    
     
 
 
@@ -292,6 +297,14 @@ const Home=(props)=> {
         )
     }
 
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        props.searchsEvent({
+            userId: user?._id 
+        })
+        wait(2000).then(() => setRefreshing(false));
+      }, []);
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar backgroundColor={colors.mainBackgroundColor} barStyle={"light-content"} />
@@ -328,6 +341,12 @@ const Home=(props)=> {
             </View>
 
             <FlatList
+                refreshControl={
+                    <RefreshControl
+                      refreshing={refreshing}
+                      onRefresh={onRefresh}
+                    />
+                  }
                 style={{ marginTop: -height*0.07, backgroundColor: 'white', borderTopRightRadius: 20, borderTopLeftRadius: 20}}
                 data={data?data:[]}
                 renderItem={renderItem}

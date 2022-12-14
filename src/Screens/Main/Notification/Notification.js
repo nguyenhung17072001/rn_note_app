@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import { View, Text, FlatList, SafeAreaView, Dimensions, StatusBar, Image, TouchableOpacity } from "react-native";
+import React, {useEffect, useState, useCallback} from "react";
+import { View, Text, FlatList, RefreshControl, Dimensions, StatusBar, Image, TouchableOpacity } from "react-native";
 import theme from "../../../Core/theme";
 const {icons, images, colors} = theme;
 const {height, width} = Dimensions.get('window')
@@ -9,10 +9,15 @@ import {connect} from 'react-redux';
 import { adminLogoutStart } from "../../../flow/reducers/admin/auth";
 import { useNavigation } from "@react-navigation/native";
 import { searchsNotificationStart } from "../../../flow/reducers/admin/notification";
+
+
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+}
 const Notification =(props)=> {
     const nav = useNavigation()
     const [user, setUser] = useState(null);
-
+    const [refreshing, setRefreshing] = React.useState(false);
 
 
     const getUser = async () => {
@@ -29,10 +34,19 @@ const Notification =(props)=> {
     useEffect(()=> {
         getUser();
         props.searchsNotification({
-            userId: "636a9d0ca6cf9ff86605fe6a"
+            userId: user?._id
         })
     }, []);
-    console.log('listNotification: ', props.listNotification)
+    console.log('listNotification: ', props.listNotification);
+    console.log('id: ', user?._id);
+    
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        props.searchsNotification({
+            userId: user?._id
+        })
+        wait(2000).then(() => setRefreshing(false));
+      }, []);
     
    
     const renderItem=({item})=> {
@@ -56,6 +70,10 @@ const Notification =(props)=> {
             </View>
             <View>
                 <FlatList
+                refreshControl={<RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                  />}
                     data={props.listNotification?props.listNotification: []}
                     renderItem={renderItem}
                     keyExtractor={item => item._id}
