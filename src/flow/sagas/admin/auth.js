@@ -53,7 +53,7 @@ export function* login(action) {
             console.log(new ErrorHttpResponseObject(res));
             console.log('err: ', errorObject);
             yield put(loginFail(errorObject));
-            yield put(errorNotification(errorObject))
+            //yield put(errorNotification(errorObject))
         }
 //    
 }

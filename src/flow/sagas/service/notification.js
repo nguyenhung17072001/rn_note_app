@@ -17,13 +17,13 @@ export async function updateDeviceToken(data) {
 
 
 export async function searchsNotificationService(data) {
+
+    data=data?data:{}
+    let params = {
+        userId: data.userId?data.userId:''
+    }
     
 
-    console.log('datazzzzzzzzzzzzz: ', data);
     
-
-    
-
-    
-    return axios.get(URL.notification.searchsNotification, data);
+    return axios.get(URL.notification.searchsNotification, {params});
 }

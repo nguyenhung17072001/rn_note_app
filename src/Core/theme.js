@@ -20,14 +20,16 @@ const icons = {
   checked: require('../assets/icons/checked.png'),
   feedback: require('../assets/icons/feedback.png'),
   logout: require('../assets/icons/logout.png'),
-  bell: require('../assets/images/bell.png')
+  bell: require('../assets/images/bell.png'),
+  
 }
 const images = {
   logoSplash: require('../assets/images/logoSplash.png'),
   //carouselb1: require('../assets/images/logo.png'),
   //carouselb2: require('../assets/images/logo.png'),
   //carouselb3: require('../assets/images/logo.png'),
-  basicAvatar: require('../assets/images/basicAvatar.png')
+  basicAvatar: require('../assets/images/basicAvatar.png'),
+  notificationBell: require('../assets/images/notificationBell.png')
   
 }
 const strings = {

@@ -31,11 +31,11 @@ const SignIn =(props)=> {
         //nav.navigate("HomeNavigation")
     }
     useEffect(()=> {
-        if(props.typeAuth=="loginSuccess") {
+        if(props.typeAuth=="loginFail") {
+            alert("Tên tài khoản hoặc mật khẩu sai")
+        } else if(props.typeAuth=="loginSuccess") {
             nav.replace("HomeNavigation")
             //nav.navigate("HomeNavigation")
-        } else if(props.typeAuth=="loginFail") {
-            alert("Tên tài khoản hoặc mật khẩu sai")
         }
     }, [props.typeAuth])
 

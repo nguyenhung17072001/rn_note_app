@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { View, Text, ScrollView, SafeAreaView, Dimensions, StatusBar, Image, TouchableOpacity } from "react-native";
+import { View, Text, FlatList, SafeAreaView, Dimensions, StatusBar, Image, TouchableOpacity } from "react-native";
 import theme from "../../../Core/theme";
 const {icons, images, colors} = theme;
 const {height, width} = Dimensions.get('window')
@@ -35,10 +35,32 @@ const Notification =(props)=> {
     console.log('listNotification: ', props.listNotification)
     
    
-    //console.log(user?.avatar)
+    const renderItem=({item})=> {
+        return(
+            <TouchableOpacity style={styles.notificationItem}>
+                <Image resizeMode="contain" style={styles.image} source={images.notificationBell} />
+                <View>
+                    <Text style={styles.title}>{item.title}</Text>
+                    <Text style={styles.bodyText}>{item.body}</Text>
+                </View>
+                
+            </TouchableOpacity>
+        )
+    }
     return(
         <View style={styles.container}>
-            <Text>Hung</Text>
+            <StatusBar backgroundColor={colors.mainBackgroundColor} barStyle={"light-content"} />
+            <View style={styles.header}>
+                <Text style={styles.labelHeader}>Thông báo</Text>
+                
+            </View>
+            <View>
+                <FlatList
+                    data={props.listNotification?props.listNotification: []}
+                    renderItem={renderItem}
+                    keyExtractor={item => item._id}
+                />
+            </View>
         </View>
     )
 }
@@ -47,7 +69,7 @@ const Notification =(props)=> {
 const mapStateToProps = state => {
     return {
         typeAuth: state.adminAuth.type,
-        listNotification: state.adminNotification
+        listNotification: state.adminNotification.listNotifications
     };
   };
 const mapStateToDispatch = dispatch => {
