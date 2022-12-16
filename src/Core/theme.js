@@ -29,8 +29,8 @@ const images = {
   //carouselb2: require('../assets/images/logo.png'),
   //carouselb3: require('../assets/images/logo.png'),
   basicAvatar: require('../assets/images/basicAvatar.png'),
-  notificationBell: require('../assets/images/notificationBell.png')
-  
+  notificationBell: require('../assets/images/notificationBell.png'),
+  reload: require('../assets/images/reload.png')
 }
 const strings = {
   themeselection:"Select App Theme Color",

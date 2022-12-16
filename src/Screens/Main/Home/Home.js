@@ -188,8 +188,7 @@ const Home=(props)=> {
             let ddmmyyyySelected = moment(selected).format('DD/MM/YYYY');
             //console.log('ddmmyyyyEvent: ', ddmmyyyyEvent)
             //console.log('ddmmyyyySelected: ', ddmmyyyySelected)
-            
-            
+
                 
                 return ddmmyyyySelected == ddmmyyyyEvent;
             

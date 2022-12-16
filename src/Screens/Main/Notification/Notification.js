@@ -16,7 +16,7 @@ const wait = (timeout) => {
 }
 const Notification =(props)=> {
     const nav = useNavigation()
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState([{}]);
     const [refreshing, setRefreshing] = React.useState(false);
 
 
@@ -39,9 +39,9 @@ const Notification =(props)=> {
         props.searchsNotification({
             userId: user?._id
         })
-    }, [user?._id])
+    }, [user])
     console.log('listNotification: ', props.listNotification);
-    console.log('id: ', user?._id);
+    console.log('id: ', user);
     
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
@@ -49,7 +49,12 @@ const Notification =(props)=> {
             userId: user?._id
         })
         wait(2000).then(() => setRefreshing(false));
-      }, []);
+    }, []);
+    const reload=()=>{
+        props.searchsNotification({
+            userId: user?._id
+        })
+    }
     
    
     const renderItem=({item})=> {
@@ -69,15 +74,17 @@ const Notification =(props)=> {
             <StatusBar backgroundColor={colors.mainBackgroundColor} barStyle={"light-content"} />
             <View style={styles.header}>
                 <Text style={styles.labelHeader}>Thông báo</Text>
-                
+                <TouchableOpacity onPress={reload}>
+                    <Image resizeMode="contain" source={images.reload} style={{height: width*0.08, width: width*0.08}}  />
+                </TouchableOpacity>
             </View>
             <View>
                 <FlatList
-                refreshControl={<RefreshControl
+                    refreshControl={<RefreshControl
                     refreshing={refreshing}
                     onRefresh={onRefresh}
                   />}
-                    data={props.listNotification?props.listNotification: []}
+                    data={props?.listNotification}
                     renderItem={renderItem}
                     keyExtractor={item => item._id}
                 />
