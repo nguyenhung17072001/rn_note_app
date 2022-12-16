@@ -33,10 +33,13 @@ const Notification =(props)=> {
     }
     useEffect(()=> {
         getUser();
+        
+    }, []);
+    useEffect(()=> {
         props.searchsNotification({
             userId: user?._id
         })
-    }, []);
+    }, [user?._id])
     console.log('listNotification: ', props.listNotification);
     console.log('id: ', user?._id);
     
